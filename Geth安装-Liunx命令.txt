@@ -1,0 +1,59 @@
+set nu
+set showmode
+set ruler
+set autoindent
+syntax on
+
+https://www.kernel.org/pub/software/scm/git/git-2.36.1.tar.gz
+https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.36.1.tar.gz
+https://nodejs.org/dist/latest/node-v18.2.0.tar.gz
+
+
+echo "export PATH=$PATH:/usr/local/nodejs/bin" >> /etc/profile && source /etc/profile
+
+echo "export PATH=$PATH:/home/go-ethereum/build/bin" >> /etc/profile && source /etc/profile
+
+geth --datadir ./data --syncmode "snap"
+
+genesis.json 
+{
+    "config": { 
+        "chainId": 15 
+    }, 
+    "difficulty": "2000", 
+    "gasLimit": "2100000", 
+    "alloc": { 
+        "0xCeB464e63858115CE055Ec814894595088e799FE": { "balance": "30000000000000000000000" }, 
+    } 
+}
+
+geth --datadir . init genesis.json
+
+geth --datadir . --networkid 15
+
+geth --datadir . --networkid 15 console
+
+geth --datadir . --networkid 15 --nodiscover console
+
+geth --datadir . --networkid 15 console 2>output.log  （输入输出重定向）
+
+geth --datadir . --networkid 15 --rpc console 2>output.log
+
+geth --datadir . --dev --networkid 1337 --http --allow-insecure-unlock --http.addr 172.27.80.150 console 2>output.log
+
+开始挖矿，挖到一个区块后停止
+miner.start(1);admin.sleepBlocks(1);miner.stop();
+
+npm init
+npm install web3 --save-dev
+npm view web3
+npm view web3 --version
+npm list web3
+eth.getBlock(4, function(error, result){if(!error) console.log(JSON.stringify(result)); else console.error(error);})
+
+solcjs --abi Coin.sol
+
+web3 使用node命令进入
+
+#执行脚本命令
+node transfer_script.js 0x66b9492d1F68B5e3F03AfebF5cC672D0d9fF5472 3000000000
