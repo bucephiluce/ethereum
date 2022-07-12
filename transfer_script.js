@@ -12,6 +12,12 @@ var _from = "0xb2b756094dFF19ddF4d426D211bE668DF2B3aec0";
 	_value: 从命令行中获取转多少币
 */
 var arguments = process.argv.splice(2);
+
+if(!arguments || arguments.length != 2){
+	console.error("Parameter error!");
+	return;
+}
+
 var _to = arguments[0];
 var _value = arguments[1];
 
