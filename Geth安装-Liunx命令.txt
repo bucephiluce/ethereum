@@ -39,7 +39,15 @@ geth --datadir . --networkid 15 console 2>output.log  （输入输出重定向）
 
 geth --datadir . --networkid 15 --rpc console 2>output.log
 
+#进入控制台命令
 geth --datadir . --dev --networkid 1337 --http --allow-insecure-unlock --http.addr 172.27.80.150 console 2>output.log
+
+#进入后台命令
+nohup geth --datadir . --dev --networkid 1337 --http --allow-insecure-unlock --http.addr 172.27.80.150 2>output.log &
+nohup geth --datadir . --dev --networkid 1337 --http --allow-insecure-unlock --http.api eth,personal --http.addr 172.27.80.150 2>output.log &
+#如果这个时候想进入后台，就用下面的命令
+geth attach http://172.27.80.150:8545 或者 geth attach /home/gethdev/geth.ipc
+
 
 开始挖矿，挖到一个区块后停止
 miner.start(1);admin.sleepBlocks(1);miner.stop();

@@ -91,3 +91,8 @@ subscription.unsubscribe(function(error, success){
     if(success)
         console.log('Successfully unsubscribed!');
 });
+
+/*
+要使用这个需要先解锁--http.api eth,personal
+*/
+web3.eth.personal.unlockAccount('0x66b9492d1f68b5e3f03afebf5cc672d0d9ff5472', '123456', 600).then(console.log('Account unlocked!'));
