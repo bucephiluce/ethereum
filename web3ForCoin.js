@@ -12,6 +12,10 @@ var optionsObject = {from: _from, gasPrice: _gasPrice};
 
 var coinContractInstance = new web3.eth.Contract(abi , coinContractAddress , optionsObject);
 
+// 调用合约的balances 
+coinContractInstance.methods.balances(_from).call(optionsObject).then(console.log);
+coinContractInstance.methods.balances(_to).call(optionsObject).then(console.log);
+
 // 调用合约的send
 coinContractInstance.methods.send(_to, _amount).send(optionsObject,function(error, transactionHash){
 	if(!error)
@@ -26,4 +30,64 @@ coinContractInstance.methods.send(_to, _amount).send(optionsObject,function(erro
 	console.error('Receipt IS Error : ' , receipt);
 }).then(function(receipt){
 	console.log('Receipt IS3 : ' , receipt);
+});
+
+/*
+estimateGas
+*/
+var _gasAmount = 5000000;
+var _gasOptions = {from: _from, gas: _gasAmount};
+
+coinContractInstance.methods.send(_to, _amount).estimateGas(_gasOptions).then(function(gasAmount){
+	console.log('Estimate Gas IS : %i , My Gas IS %i', gasAmount , _gasAmount);
+}).catch(function(error){
+	console.error;
+});
+
+/*
+事件
+*/
+var _event = 'Sent';
+coinContractInstance.once(_event, {fromBlock:0}, function(error, event){
+	console.log(event);
+});
+
+coinContractInstance.events.Sent({fromBlock: 'earliest'}, function(error, event){
+	console.log(event);
+}).on("connected", function(subscriptionId){
+	console.log(subscriptionId);
+}).on('data', function(event){
+	console.log(event);
+}).on('changed', function(event){
+	// 从本地数据库中删除事件
+}).on('error', function(error, receipt){
+	// 如果交易被网络拒绝并带有交易收据，第二个参数将是交易收据。
+});
+
+coinContractInstance.getPastEvents(_event, {fromBlock: 0, toBlock: 'latest'}/*, function(error, events){
+	console.log(events);
+}*/).then(function(events){
+	console.log(events) // same results as the optional callback above
+});
+
+/*
+订阅日志
+*/
+var subscription = web3.eth.subscribe('logs', {
+	address: coinContractAddress,
+	fromBlock: 0
+}, function(error, result){
+	if(!error)
+		console.log(result);
+}).on("connected", function(subscriptionId){
+    console.log(subscriptionId);
+}).on("data", function(log){
+    console.log(log);
+}).on("changed", function(log){
+});
+
+// 取消订阅
+subscription.unsubscribe(function(error, success){
+    if(success)
+        console.log('Successfully unsubscribed!');
 });
