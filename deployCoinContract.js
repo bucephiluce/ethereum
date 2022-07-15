@@ -17,17 +17,21 @@ var deployTxObject = {from: "0xb2b756094dff19ddf4d426d211be668df2b3aec0", gas: 1
 */
 CoinContract.deploy({
 	data: byteCode
-})
-.send(deployTxObject,
-	(error,transactionHash)=>{
-		if(!error){console.log("TransactionHash 1 :",transactionHash)
-		}
-	})
-.on('error', function(error){console.error()})
-.on('transactionHash',function(transactionHash){console.log("TransactionHash 2:",transactionHash)})
-.on('receipt', function(receipt){console.log('Contract Address IS(receipt) :' , receipt.contractAddress)})
-.on('confirmation',function(confirmationNumber, receipt){console.log('ConfirmationNumber : '+confirmationNumber + ' ; Contract Address IS :'+receipt.contractAddress)})
-.then(function(newContractInstance){console.log('Contract Address IS(newContractInstance) :'+newContractInstance.options.address)});
+}).send(deployTxObject,(error,transactionHash)=>{
+	if(!error){
+		console.log("TransactionHash 1 :", transactionHash)
+	}
+}).on('error', function(error){
+	console.error()
+}).on('transactionHash',function(transactionHash){
+	console.log("TransactionHash 2:", transactionHash)
+}).on('receipt', function(receipt){
+	console.log('Contract Address IS(receipt) :', receipt.contractAddress)
+}).on('confirmation',function(confirmationNumber, receipt){
+	console.log('ConfirmationNumber : %i ; Contract Address IS : %s', confirmationNumber, receipt.contractAddress)
+}).then(function(newContractInstance){
+	console.log('Contract Address IS(newContractInstance): ', newContractInstance.options.address)
+});
 
 /*
 执行之后的返回值：
@@ -49,8 +53,7 @@ CoinContract = new web3.eth.Contract(_abi, coinContractAddress, {from: from, gas
 var BigNumber = require('bignumber.js');
 var amount = new BigNumber('135456432156465841321654654156265');
 
-CoinContract.methods.mint(from, amount).send({from:from})
-.then(function(receipt){console.log(receipt)});
+CoinContract.methods.mint(from, amount).send({from:from}).then(function(receipt){console.log(receipt)});
 
 /*
 执行之后的输出结果：
