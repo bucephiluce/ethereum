@@ -1,0 +1,15 @@
+{
+    "scripts": {
+        "compile": "node voteDapp/contracts/script/compileVoteAndSave.js",
+        "pretest": "npm run compile",
+        "test": "mocha voteDapp/contracts/test/",
+        "predeploy": "npm run compile",
+        "deploy": "node voteDapp/contracts/script/deployVote.js"
+    },
+    "dependencies": {
+        "solc": "^0.8.15"
+    },
+    "devDependencies": {
+        "mocha": "^10.0.0"
+    }
+}

@@ -50,6 +50,9 @@ geth attach http://172.27.80.150:8545 或者 geth attach /home/gethdev/geth.ipc
 #注意，无论是使用那种方式监听事件，我们都应该使用webSocketProvider的方式与区块链建立连接，因为http的方式已经不再支持事件的监听了。
 nohup geth --datadir . --dev --networkid 1337 --ws --ws.addr 172.27.80.150 --allow-insecure-unlock 2>output.log &
 
+nohup geth --datadir . --rinkeby --http --http.api db,eth,net,web3,personal --http.port 8543 --http.addr 172.27.80.150 2>output.log &
+
+
 开始挖矿，挖到一个区块后停止
 miner.start(1);admin.sleepBlocks(1);miner.stop();
 
@@ -66,3 +69,7 @@ web3 使用node命令进入
 
 #执行脚本命令
 node transfer_script.js 0x66b9492d1F68B5e3F03AfebF5cC672D0d9fF5472 3000000000
+
+查看磁盘空间
+df -TH
+du -sch /home/*
