@@ -1,5 +1,5 @@
 """
-    安装扩展库numpy scipy matplotlib 
+    安装扩展库numpy scipy matplotlib seaborn lxml bs4 selenium
     安装命令 pip install numpy scipy matplotlib -i https://pypi.tuna.tsinghua.edu.cn/simple
     更新命令 python -m pip install -U pycodestyle setuptools -i https://pypi.tuna.tsinghua.edu.cn/simple
     pip list -o
