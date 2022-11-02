@@ -1,6 +1,6 @@
 # Python 学习
 ## Python 安装扩展库
-numpy scipy matplotlib seaborn lxml bs4 selenium requests scrapy ipython pymysql jieba Scikit-learn tensorflow statsmodels
+numpy scipy matplotlib seaborn lxml bs4 selenium requests scrapy ipython pymysql jieba Scikit-learn tensorflow statsmodels mlxtend
 ## Python 安装命令
 pip install numpy scipy matplotlib -i https://pypi.tuna.tsinghua.edu.cn/simple
 ## Python 更新命令
